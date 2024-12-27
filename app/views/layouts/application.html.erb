@@ -38,8 +38,10 @@
         </div>
 
         <!-- Dark Mode Toggle Button -->
-        <button id="dark-mode-toggle" class="text-blue-600 dark:text-blue-400">
-          <span id="dark-mode-icon">🌙</span>
+        <button data-controller="dark-mode" 
+                data-action="dark-mode#toggle"
+                class="text-blue-600 dark:text-blue-400">
+          <span data-dark-mode-target="icon">🌙</span>
         </button>
 
         <!-- Hamburger Menu for Mobile -->
