@@ -1,80 +1,112 @@
-# Image Vault
+# Image Vault 🖼️
 
-Image Vault is a Rails 7 application that allows users to search, select, and manage stock images. Administrators can manage users, projects, and view images tied to specific users or projects. The application uses modern tools like Tailwind CSS for styling and Devise for authentication.
+A modern Rails 7 application for searching, managing, and organizing stock images from multiple sources. Built with security and user experience in mind, featuring dark mode support and responsive design.
 
-## Features
+## ✨ Key Features
 
-- **User Authentication**: Managed using Devise for secure login and user management.
-- **Image Search**: Search stock images using integrated APIs.
-- **Image Selection**: Select and save images tied to a user and their project.
-- **Admin Features**: Manage users, projects, and view selected images.
-- **Modern Styling**: Tailwind CSS provides a responsive and visually appealing design.
+- **🔐 Secure Authentication**: Full user authentication system with Devise
+- **🔍 Multi-Source Image Search**: Integrated with multiple stock image APIs:
+  - Unsplash
+  - Pexels
+  - Pixabay
+- **💾 Image Management**: Save and organize images in your personal vault
+- **🌓 Dark Mode**: Full dark mode support with persistent user preference
+- **📱 Responsive Design**: Mobile-first approach using Tailwind CSS
+- **👥 User Management**: Admin interface for user and project management
+- **🔒 Security**: Implemented Content Security Policy (CSP)
 
-## Prerequisites
+## 🛠️ Technical Stack
 
-Ensure you have the following installed:
+- **Backend**: Ruby 3.2.2, Rails 7.1.5
+- **Frontend**: 
+  - Tailwind CSS for styling
+  - Stimulus.js for JavaScript interactions
+  - Turbo for SPA-like experience
+- **Database**: PostgreSQL
+- **Authentication**: Devise
+- **Security**: Content Security Policy (CSP)
+- **Testing**: RSpec (coming soon)
+
+## 📋 Prerequisites
 
 - Ruby 3.2.2
 - Rails 7.1.5
-- Node.js (for Tailwind CSS)
-- PostgreSQL (for database management)
+- Node.js 18+ and Yarn
+- PostgreSQL 14+
+- Redis (for Action Cable - coming soon)
 
-## Installation
+## 🚀 Installation
 
-1. **Clone the Repository**:
+1. **Clone and Setup**:
    ```bash
-   git clone <repository_url>
-   cd image_vault
-   ```
-
-2. **Install Dependencies**:
-   ```bash
+   git clone https://github.com/yourusername/image-vault.git
+   cd image-vault
    bundle install
+   yarn install
    ```
 
-3. **Setup CSS Bundling**:
-   Ensure Node.js is installed, then install Tailwind CSS:
-   ```bash
-   rails css:install:tailwind
+2. **Environment Configuration**:
+   Create a `.env` file:
+   ```
+   UNSPLASH_ACCESS_KEY=your_key
+   PEXELS_API_KEY=your_key
+   PIXABAY_API_KEY=your_key
    ```
 
-4. **Setup Environment Variables**:
-   Create a `.env` file in the root directory and add your API keys:
-   ```plaintext
-   STOCK_IMAGE_API_KEY=your_api_key
-   ```
-
-5. **Setup the Database**:
+3. **Database Setup**:
    ```bash
    rails db:create db:migrate
+   rails db:seed  # Creates admin user
    ```
 
-6. **Start the Server**:
+4. **Start the Application**:
    ```bash
-   rails server
+   ./bin/dev  # Starts Rails server with CSS/JS watching
    ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+Visit [http://localhost:3000](http://localhost:3000)
 
-## Usage
+## 👤 Default Admin Login
 
-### Users
-- Log in to search and select images.
-- View selected images under "My Selected Images" in the navigation bar.
+- Email: admin@example.com
+- Password: password123
 
-### Admins
-- Log in to access administrative tools:
-  - Manage users and projects.
-  - View all images tied to users and projects.
+*Remember to change these credentials in production!*
 
+## 🔒 Security Features
 
-## Technologies Used
+- Content Security Policy (CSP) implementation
+- CSRF protection
+- Secure password handling with Devise
+- API key protection
+- XSS prevention
 
-- **Rails 7**: Framework for building the application.
-- **Devise**: User authentication.
-- **Tailwind CSS**: Styling and responsiveness.
-- **PostgreSQL**: Database management.
-- **HTTParty**: For API requests to fetch stock images.
-- **dotenv-rails**: Manage environment variables.
-- **Turbo Rails**: Enhanced responsiveness and SPA-like behavior.
+## 🎯 Upcoming Features
+
+- [ ] Image tagging and categorization
+- [ ] Bulk image operations
+- [ ] Advanced search filters
+- [ ] API rate limiting
+- [ ] User activity logging
+- [ ] Image usage analytics
+- [ ] Project sharing
+- [ ] RSpec test suite
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## 🙏 Acknowledgments
+
+- Stock image providers: Unsplash, Pexels, and Pixabay
+- The Ruby on Rails community
+- Contributors and users of this project
 
