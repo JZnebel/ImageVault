@@ -2,10 +2,7 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     resources :users
-    resources :projects do
-      post 'add_users', on: :member
-      delete 'remove_user/:user_id', to: 'projects#remove_user', on: :member, as: 'remove_user'
-    end
+    resources :projects
   end
 
   # Devise routes (no public signup)
