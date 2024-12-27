@@ -45,10 +45,30 @@ class Admin::ProjectsController < Admin::BaseController
     end
   end
 
+  def add_users
+    @project = Project.find(params[:id])
+    user_ids = params[:user_ids]
+
+    if user_ids.present?
+      users = User.where(id: user_ids)
+      users.update_all(project_id: @project.id)
+      redirect_to admin_project_path(@project), notice: "Users added successfully."
+    else
+      redirect_to admin_project_path(@project), alert: "No users selected."
+    end
+  end
+
+  def remove_user
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_id])
+    
+    @user.update(project_id: nil)
+    redirect_to admin_project_path(@project), notice: "User removed from project."
+  end
+
   private
 
   def project_params
-    # Adjust the permitted attributes as needed for your Project model
     params.require(:project).permit(:name, :description)
   end
 end
