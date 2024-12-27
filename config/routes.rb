@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     resources :users
-    resources :projects
+    resources :projects do
+      member do
+        post :add_user
+        delete :remove_user
+      end
+    end
   end
 
   # Devise routes (no public signup)

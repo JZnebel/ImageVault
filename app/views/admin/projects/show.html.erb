@@ -3,9 +3,54 @@
   <p class="text-gray-700 dark:text-gray-300 mb-2"><%= @project.description %></p>
 </div>
 
+<!-- Project Users Section -->
 <div class="mb-6">
-  <h1 class="text-2xl font-semibold text-gray-700 dark:text-white"><%= @project.name %></h1>
-  <p class="text-gray-700 dark:text-gray-300 mb-2"><%= @project.description %></p>
+  <h2 class="text-xl font-semibold text-gray-700 dark:text-white mb-4">Project Users</h2>
+  
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+    <!-- Current Users -->
+    <div class="mb-6">
+      <h3 class="text-lg font-medium text-gray-700 dark:text-white mb-2">Current Users</h3>
+      <% if @users.any? %>
+        <div class="space-y-2">
+          <% @users.each do |user| %>
+            <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-2 rounded">
+              <span class="text-gray-700 dark:text-gray-300"><%= user.email %></span>
+              <%= button_to "Remove", 
+                          remove_user_admin_project_path(@project, user_id: user.id),
+                          method: :delete,
+                          class: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300",
+                          form: { class: "inline" } %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-gray-500 dark:text-gray-400">No users assigned to this project</p>
+      <% end %>
+    </div>
+
+    <!-- Add Users -->
+    <div>
+      <h3 class="text-lg font-medium text-gray-700 dark:text-white mb-2">Add User</h3>
+      <% available_users = User.without_project %>
+      <% if available_users.any? %>
+        <div class="space-y-2">
+          <% available_users.each do |user| %>
+            <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-2 rounded">
+              <span class="text-gray-700 dark:text-gray-300"><%= user.email %></span>
+              <%= button_to "Add", 
+                          add_user_admin_project_path(@project, user_id: user.id),
+                          method: :post,
+                          class: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300",
+                          form: { class: "inline" } %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-gray-500 dark:text-gray-400">No available users to add</p>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="mt-6">

@@ -46,6 +46,22 @@ class Admin::ProjectsController < Admin::BaseController
   end
 
 
+  def add_user
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_id])
+    
+    @user.update(project: @project)
+    redirect_to admin_project_path(@project), notice: "User added to project."
+  end
+
+  def remove_user
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_id])
+    
+    @user.update(project: nil)
+    redirect_to admin_project_path(@project), notice: "User removed from project."
+  end
+
   private
 
   def project_params
