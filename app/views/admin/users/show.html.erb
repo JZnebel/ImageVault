@@ -1,0 +1,38 @@
+<h1 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white"><%= @user.email %></h1>
+<p class="text-gray-700 mb-2 dark:text-white">Role: <%= @user.role %></p>
+<p class="text-gray-700 mb-4 dark:text-white">Project: <%= @user.project&.name || "None" %></p>
+
+<h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Selected Images</h2>
+<% if @images.any? %>
+  <ul class="space-y-2">
+    <% @images.each do |img| %>
+      <li class="p-3 bg-white rounded shadow flex items-center space-x-4 dark:bg-gray-700 dark:border-gray-600">
+        <% if img.file.attached? %>
+          <a href="<%= url_for(img.file) %>" target="_blank" rel="noopener noreferrer">
+            <img src="<%= url_for(img.file) %>" class="w-24 h-auto rounded" alt="Uploaded Image" />
+          </a>
+        <% elsif img.url.present? %>
+          <% stripped_url = img.url.split('?').first %>
+          <a href="<%= stripped_url %>" target="_blank" rel="noopener noreferrer">
+            <img src="<%= img.url %>" class="w-24 h-auto rounded" alt="External Image" />
+          </a>
+        <% else %>
+          <p class="text-gray-500 dark:text-gray-400">Image is missing or not available.</p>
+        <% end %>
+
+        <div class="flex flex-col">
+          <p class="text-gray-700 dark:text-white"><strong>Attribution:</strong> <%= img.attribution.presence || "None provided" %></p>
+          <p class="text-gray-700 dark:text-white"><strong>Notes:</strong> <%= img.notes.presence || "No notes added." %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-gray-600 dark:text-gray-400">No images selected by this user.</p>
+<% end %>
+
+<div class="mt-4">
+  <%= link_to "Back to All Users",
+              admin_users_path,
+              class: "bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700" %>
+</div>

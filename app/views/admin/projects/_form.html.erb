@@ -1,0 +1,26 @@
+<%= form_with(model: [:admin, @project], local: true, class: "space-y-4 bg-white dark:bg-gray-800 p-4 rounded shadow") do |form| %>
+  <% if @project.errors.any? %>
+    <div class="bg-red-50 border border-red-400 text-red-700 p-3 mb-4 rounded dark:bg-red-900 dark:border-red-800 dark:text-red-400">
+      <h2 class="font-semibold"><%= pluralize(@project.errors.count, "error") %> prevented saving:</h2>
+      <ul class="list-disc list-inside">
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.text_field :name, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.label :description, class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.text_area :description, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600" %>
+  </div>
+<% end %>

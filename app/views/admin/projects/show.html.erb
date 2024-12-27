@@ -1,0 +1,25 @@
+<div class="mb-6">
+  <h1 class="text-2xl font-semibold text-gray-700 dark:text-white"><%= @project.name %></h1>
+  <p class="text-gray-700 dark:text-gray-300 mb-2"><%= @project.description %></p>
+</div>
+
+<h2 class="text-xl font-semibold mb-2 text-gray-700 dark:text-white">Users in this project</h2>
+<% if @users.any? %>
+  <ul class="space-y-2">
+    <% @users.each do |user| %>
+      <li class="p-2 bg-white dark:bg-gray-800 rounded shadow flex items-center justify-between">
+        <div>
+          <%= link_to user.email, admin_user_path(user), class: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" %>
+          (<%= user.role %>)
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-gray-600 dark:text-gray-400">No users assigned to this project yet.</p>
+<% end %>
+
+<div class="mt-4">
+  <%= link_to "Back to Projects", admin_projects_path,
+              class: "inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-white px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600" %>
+</div>

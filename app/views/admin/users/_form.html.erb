@@ -1,0 +1,43 @@
+<%= form_with(model: [:admin, @user], url: @user.new_record? ? admin_users_path : admin_user_path(@user), local: true, class: "space-y-4 bg-white dark:bg-gray-800 p-4 rounded shadow") do |form| %>
+  <% if @user.errors.any? %>
+    <div class="bg-red-50 border border-red-400 text-red-700 p-3 mb-4 rounded dark:bg-red-900 dark:border-red-800 dark:text-red-400">
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented saving:</h2>
+      <ul class="list-disc list-inside">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :email, class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.email_field :email, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.label :password, "Password (leave blank if unchanged)", class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.password_field :password, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation, class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.password_field :password_confirmation, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.label :role, class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.select :role, ["admin", "user"], include_blank: false, class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+  </div>
+
+  <div>
+    <%= form.label :project_id, "Project", class: "block font-semibold mb-1 text-gray-700 dark:text-white" %>
+    <%= form.collection_select :project_id, Project.all, :id, :name, 
+                              { include_blank: "No Project" },
+                              { class: "border border-gray-300 rounded px-3 py-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white" } %>
+  </div>
+
+  <div>
+    <%= form.submit class: "bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600" %>
+  </div>
+<% end %>

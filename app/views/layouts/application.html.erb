@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="<%= 'dark' if cookies[:dark_mode] == 'true' %>">
+  <head>
+    <title>ImageVault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-200 py-3 dark:bg-gray-800 dark:border-gray-700">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <a href="/" class="text-xl font-bold text-blue-600 dark:text-blue-400">ImageVault</a>
+        
+        <!-- Responsive Navigation -->
+        <div class="hidden sm:flex space-x-4">
+          <% if user_signed_in? %>
+            <%= link_to "Search", root_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %>
+            <%= link_to "Upload", new_image_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %>
+            <%= link_to "Image Vault", images_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %> 
+
+            <% if current_user.admin? %>
+              <%= link_to "Users", admin_users_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %>
+              <%= link_to "Projects", admin_projects_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %>
+            <% end %>
+
+            <%= link_to "Logout", destroy_user_session_path, 
+                        data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" },
+                        class: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500" %>
+
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "hover:text-blue-600 dark:hover:text-blue-400" %>
+          <% end %>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button id="dark-mode-toggle" class="text-blue-600 dark:text-blue-400">
+          <span id="dark-mode-icon">🌙</span>
+        </button>
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="flex sm:hidden">
+          <button id="menu-button" class="text-blue-600 text-xl focus:outline-none dark:text-blue-400">
+            ☰
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobile-menu" class="sm:hidden bg-white border-t border-gray-200 hidden dark:bg-gray-800 dark:border-gray-700">
+      <div class="px-4 py-2 space-y-2">
+        <% if user_signed_in? %>
+          <%= link_to "Search", root_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+          <%= link_to "Upload", new_image_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %> 
+          <%= link_to "Image Vault", images_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+
+          <% if current_user.admin? %>
+            <%= link_to "Users", admin_users_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+            <%= link_to "Projects", admin_projects_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+          <% end %>
+
+          <%= link_to "Logout", destroy_user_session_path, 
+                      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" },
+                      class: "block text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4">
+      <%= yield %>
+    </main>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      document.getElementById('menu-button').addEventListener('click', () => {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

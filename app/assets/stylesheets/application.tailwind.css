@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Target specific select elements by ID */
+#user_role,
+#user_project_id {
+  background-color: white !important;
+  color: black !important;
+}
+
+.drag-drop-zone {
+  border: 2px dashed #cbd5e1;
+  transition: all 0.2s ease-in-out;
+}
+
+.drag-drop-zone.dragover {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+}

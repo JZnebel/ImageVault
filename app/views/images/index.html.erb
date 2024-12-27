@@ -1,0 +1,46 @@
+<h1 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">My Selected Images</h1>
+
+<% if @images.any? %>
+  <ul class="space-y-4">
+    <% @images.each do |img| %>
+      <li class="p-4 bg-white rounded shadow flex space-x-4 items-center dark:bg-gray-800 dark:border-gray-700">
+        <!-- Image handling for SVGs or uploaded images -->
+        <% if img.file.attached? && img.file.content_type == 'image/svg+xml' %>
+          <%= image_tag rails_blob_path(img.file, disposition: "inline"), 
+              class: "w-32 h-32 object-fill rounded bg-gray-100 dark:bg-gray-700", 
+              alt: (img.attribution || 'SVG Image') %>
+        <% elsif img.file.attached? %>
+          <%= image_tag url_for(img.file),
+              class: "w-32 h-32 object-contain rounded bg-gray-100 dark:bg-gray-700",
+              alt: (img.attribution || 'Uploaded Image'),
+              loading: "lazy" %>
+        <% elsif img.url.present? %>
+          <%= link_to img.url, target: "_blank", rel: "noopener noreferrer" do %>
+            <%= image_tag img.url,
+                class: "w-32 h-32 object-contain rounded bg-gray-100 dark:bg-gray-700",
+                alt: (img.attribution || 'External Image'),
+                loading: "lazy" %>
+          <% end %>
+        <% else %>
+          <p class="text-gray-500 dark:text-gray-400">Image is missing or not available.</p>
+        <% end %>
+        
+        <div class="flex flex-col flex-grow">
+          <p class="text-gray-700 dark:text-gray-300"><%= img.attribution.presence || "None provided" %></p>
+          <textarea
+            data-id="<%= img.id %>"
+            class="w-full border border-gray-300 rounded p-2 mt-2 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+            placeholder="Add notes about this image..."
+            onblur="saveNotes(this)"
+          ><%= img.notes %></textarea>
+          <%= link_to "Remove",
+              image_path(img),
+              class: "text-red-600 hover:text-red-800 mt-2 dark:text-red-400 dark:hover:text-red-500",
+              data: { turbo_method: :delete, turbo_confirm: "Remove this image?" } %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-gray-600 dark:text-gray-400">No images selected yet.</p>
+<% end %>

@@ -1,0 +1,65 @@
+<h1 class="text-xl sm:text-2xl font-semibold mb-4">Search for Images</h1>
+<div class="flex flex-col sm:flex-row sm:space-x-2 items-center mb-6 space-y-4 sm:space-y-0">
+  <!-- Search Input -->
+  <input type="text" id="search-input"
+         class="border border-gray-300 rounded px-3 py-2 w-full sm:w-64 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+         placeholder="Type a keyword..." />
+
+  <!-- Transparent Background Checkbox -->
+  <label class="flex items-center space-x-2">
+    <input type="checkbox" id="transparent-checkbox" />
+    <span class="text-gray-700 text-sm dark:text-white">Transparent Background</span>
+  </label>
+
+  <!-- Search Button -->
+  <button id="search-button"
+          class="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 w-full sm:w-auto">
+    Search
+  </button>
+</div>
+
+
+<!-- Add grid layout to results by default -->
+<div id="results" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <!-- Dynamic content will be rendered here -->
+</div>
+
+<!-- Pagination controls -->
+<div id="pagination" class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2 mt-4">
+  <!-- Pagination buttons will be dynamically inserted here -->
+</div>
+
+<!-- Modal for displaying larger image -->
+<div id="image-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex justify-center items-center p-4">
+  <div class="bg-white rounded-lg overflow-hidden max-w-full sm:max-w-3xl w-full relative shadow-lg">
+    <!-- Close Button -->
+    <button
+      id="close-modal"
+      class="absolute top-2 right-2 bg-red-500 text-white hover:bg-red-600 text-lg rounded-full p-2 shadow-lg"
+      aria-label="Close"
+    >
+      &times;
+    </button>
+    <!-- Modal Content -->
+    <div class="flex flex-col justify-center items-center p-4">
+      <!-- Image -->
+      <img
+        id="modal-image"
+        src=""
+        alt="Full Image"
+        class="max-w-full max-h-[70vh] object-contain bg-gray-200"
+        data-id=""
+      />
+      <!-- Attribution -->
+      <div id="modal-attribution" class="p-4 text-gray-700 text-sm text-center"></div>
+
+      <!-- Select Button -->
+      <button
+        id="modal-select-button"
+        class="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-blue-700 focus:ring focus:ring-blue-300 transition mt-4 w-full sm:w-auto"
+      >
+        Select
+      </button>
+    </div>
+  </div>
+</div>
