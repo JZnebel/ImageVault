@@ -42,12 +42,15 @@ export default class extends Controller {
     })
     this.inputTarget.files = dataTransfer.files
     
-    this.handleFiles(files)
+    this.displayFiles(files)
   }
 
-  handleFiles(event) {
-    const files = event.type === 'drop' ? event.dataTransfer.files : event.target.files
-    
+  handleFiles(e) {
+    const files = e.target.files
+    this.displayFiles(files)
+  }
+
+  displayFiles(files) {
     if (files && files.length > 0) {
       this.listTarget.innerHTML = ''
       Array.from(files).forEach(file => {
