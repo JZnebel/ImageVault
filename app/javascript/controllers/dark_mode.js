@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button", "icon"]
+  static targets = ["icon"]
 
   connect() {
-    this.updateDarkMode(this.getCookie("dark_mode") === "true")
+    const isDarkMode = document.documentElement.classList.contains("dark")
+    this.updateDarkMode(isDarkMode)
   }
 
   toggle() {
