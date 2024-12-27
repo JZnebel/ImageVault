@@ -3,13 +3,15 @@
 <%= form_with model: @image, url: images_path, local: true do |form| %>
   <div class="mb-4">
     <%= form.label :file, "Choose Images", class: "block text-sm font-medium text-gray-700 dark:text-white" %>
-    <div class="drag-drop-zone mt-1 p-8 text-center rounded-md cursor-pointer" id="dragDropZone">
+    <div class="drag-drop-zone mt-1 p-8 text-center rounded-md cursor-pointer" 
+         data-controller="drag-drop"
+         data-drag-drop-target="zone">
       <div class="text-gray-500 dark:text-gray-400">
         <p>Drag and drop images here or</p>
         <%= form.file_field :files, multiple: true, accept: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp", 
             capture: "filesystem", 
             class: "hidden", 
-            id: "fileInput",
+            data-drag-drop-target="input",
             data: { 
               controller: "upload",
               action: "change->upload#handleFiles"
@@ -19,90 +21,11 @@
           Browse Files
         </button>
       </div>
-      <div id="fileList" class="mt-4 space-y-2"></div>
+      <div data-drag-drop-target="list" class="mt-4 space-y-2"></div>
     </div>
     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can select multiple files</p>
   </div>
 
-  <%= javascript_tag do %>
-    const dragDropZone = document.getElementById('dragDropZone');
-    const fileInput = document.getElementById('fileInput');
-    const fileList = document.getElementById('fileList');
-
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      dragDropZone.addEventListener(eventName, preventDefaults, false);
-    });
-
-    function preventDefaults(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-      dragDropZone.addEventListener(eventName, highlight, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-      dragDropZone.addEventListener(eventName, unhighlight, false);
-    });
-
-    function highlight(e) {
-      dragDropZone.classList.add('dragover');
-    }
-
-    function unhighlight(e) {
-      dragDropZone.classList.remove('dragover');
-    }
-
-    dragDropZone.addEventListener('drop', handleDrop, false);
-
-    function handleDrop(e) {
-      const dt = e.dataTransfer;
-      const files = dt.files;
-      
-      // Transfer dropped files to the file input
-      const dataTransfer = new DataTransfer();
-      Array.from(files).forEach(file => {
-        dataTransfer.items.add(file);
-      });
-      fileInput.files = dataTransfer.files;
-      
-      handleFiles(files);
-    }
-
-    fileInput.addEventListener('change', function(e) {
-      handleFiles(this.files);
-    });
-
-    function handleFiles(files) {
-      if (files && files.length > 0) {
-        fileList.innerHTML = '';
-        Array.from(files).forEach(file => {
-          const fileItem = document.createElement('div');
-          fileItem.className = 'text-sm text-gray-600 dark:text-gray-300';
-          fileItem.textContent = `${file.name} (${formatFileSize(file.size)})`;
-          fileList.appendChild(fileItem);
-        });
-      }
-    }
-
-    // Reset form after successful upload
-    document.addEventListener('turbo:load', function() {
-      const form = document.querySelector('form');
-      if (form) {
-        form.reset();
-        fileList.innerHTML = '';
-      }
-    });
-
-    function formatFileSize(bytes) {
-      if (bytes === 0) return '0 Bytes';
-      const k = 1024;
-      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-    }
-  <% end %>
 
   <div class="mb-4">
     <%= form.label :notes, "Notes", class: "block text-sm font-medium text-gray-700 dark:text-white" %>
