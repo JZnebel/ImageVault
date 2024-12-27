@@ -40,14 +40,16 @@
         <!-- Dark Mode Toggle Button -->
         <button data-controller="dark-mode" 
                 data-action="dark-mode#toggle"
-                class="text-blue-600 dark:text-blue-400">
+                class="text-blue-600 dark:text-blue-400"
+                nonce="<%= request.content_security_policy_nonce %>">
           <span data-dark-mode-target="icon">🌙</span>
         </button>
 
         <!-- Hamburger Menu for Mobile -->
         <div class="flex sm:hidden" data-controller="mobile-menu">
           <button data-action="mobile-menu#toggle" 
-                  class="text-blue-600 text-xl focus:outline-none dark:text-blue-400">
+                  class="text-blue-600 text-xl focus:outline-none dark:text-blue-400"
+                  nonce="<%= request.content_security_policy_nonce %>">
             ☰
           </button>
         </div>
