@@ -8,15 +8,17 @@
          data-drag-drop-target="zone">
       <div class="text-gray-500 dark:text-gray-400">
         <p>Drag and drop images here or</p>
-        <%= form.file_field :files, multiple: true, accept: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp", 
+        <%= form.file_field :files, 
+            multiple: true, 
+            accept: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp", 
             capture: "filesystem", 
             class: "hidden", 
-            data-drag-drop-target="input",
             data: { 
-              controller: "upload",
-              action: "change->upload#handleFiles"
+              controller: "drag-drop",
+              drag_drop_target: "input",
+              action: "change->drag-drop#handleFiles"
             } %>
-        <button type="button" onclick="document.getElementById('fileInput').click()" 
+        <button type="button" data-action="click->drag-drop#browse"
                 class="mt-2 inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
           Browse Files
         </button>
