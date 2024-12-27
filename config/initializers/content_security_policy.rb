@@ -9,7 +9,8 @@ Rails.application.configure do
                        "https://images.pexels.com",
                        "https://pixabay.com"
     policy.object_src  :none
-    policy.script_src  :self, :https, :unsafe_hashes, :strict_dynamic
+    policy.script_src  :self, :https, :unsafe_hashes, :strict_dynamic, :unsafe_inline
+    policy.script_src_attr :unsafe_inline
     policy.style_src   :self, :https, :unsafe_inline  # For Tailwind
     policy.connect_src :self, :https,
                        "https://api.unsplash.com",
