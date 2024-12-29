@@ -18,3 +18,45 @@
   border-color: #3b82f6;
   background-color: rgba(59, 130, 246, 0.1);
 }
+
+/* Styling for #results in light mode */
+#results {
+  background-color: #ffffff; /* White background for light mode */
+}
+
+/* Styling for #results in dark mode */
+.dark #results {
+  background-color: #1f2937; /* Dark gray for dark mode */
+}
+
+#results .relative {
+  background-color: #f9fafb; /* Light card background */
+}
+
+.dark #results .relative {
+  background-color: #374151; /* Dark card background */
+}
+
+#results img {
+  background-color: #e5e7eb; /* Light image placeholder */
+}
+
+.dark #results img {
+  background-color: #4b5563; /* Dark image placeholder */
+}
+
+#results .select-image {
+  background-color: #3b82f6; /* Light mode button */
+}
+
+.dark #results .select-image {
+  background-color: #2563eb; /* Dark mode button */
+}
+
+#results .select-image:hover {
+  background-color: #2563eb; /* Light mode hover */
+}
+
+.dark #results .select-image:hover {
+  background-color: #1d4ed8; /* Dark mode hover */
+}
