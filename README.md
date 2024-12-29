@@ -2,6 +2,8 @@
 
 A modern Rails 7 application for searching, managing, and organizing stock images from multiple sources. Built with security and user experience in mind, featuring dark mode support and responsive design.
 
+https://www.youtube.com/watch?v=Y3xGzGOAojE
+
 ## ✨ Key Features
 
 - **🔐 Secure Authentication**: Full user authentication system with Devise
