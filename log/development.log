@@ -34380,3 +34380,15 @@ Migrating to EnsureProjectIdColumnOnUsers (20241227042500)
 [dotenv] Loaded [33m.env[0m
 [dotenv] Loaded [33m.env[0m
 [dotenv] Loaded [33m.env[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: config.active_storage.replace_on_assign_to_many is deprecated and has no effect. (called from <main> at /home/jordan/jtz/image_vault/config/environment.rb:5)
+[dotenv] Set [36mPEXELS_API_KEY[0m, [36mPIXABAY_API_KEY[0m, and [36mUNSPLASH_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: config.active_storage.replace_on_assign_to_many is deprecated and has no effect. (called from <main> at /home/jordan/jtz/image_vault/config/environment.rb:5)
+[dotenv] Set [36mPEXELS_API_KEY[0m, [36mPIXABAY_API_KEY[0m, and [36mUNSPLASH_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: config.active_storage.replace_on_assign_to_many is deprecated and has no effect. (called from <main> at /home/jordan/jtz/image_vault/config/environment.rb:5)
+[dotenv] Set [36mPEXELS_API_KEY[0m, [36mPIXABAY_API_KEY[0m, and [36mUNSPLASH_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: config.active_storage.replace_on_assign_to_many is deprecated and has no effect. (called from <main> at /home/jordan/jtz/image_vault/config/environment.rb:5)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

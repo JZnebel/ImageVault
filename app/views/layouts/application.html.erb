@@ -50,32 +50,32 @@
                   class="text-blue-600 text-xl focus:outline-none dark:text-blue-400">
             ☰
           </button>
+          
+          <!-- Mobile Navigation Dropdown -->
+          <div data-mobile-menu-target="menu" 
+               class="sm:hidden bg-white border-t border-gray-200 hidden dark:bg-gray-800 dark:border-gray-700">
+            <div class="px-4 py-2 space-y-2">
+              <% if user_signed_in? %>
+                <%= link_to "Search", root_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+                <%= link_to "Upload", new_image_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %> 
+                <%= link_to "Image Vault", images_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+
+                <% if current_user.admin? %>
+                  <%= link_to "Users", admin_users_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+                  <%= link_to "Projects", admin_projects_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+                <% end %>
+
+                <%= link_to "Logout", destroy_user_session_path, 
+                            data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" },
+                            class: "block text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500" %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
-
-    <!-- Mobile Navigation Dropdown -->
-    <div data-mobile-menu-target="menu" 
-         class="sm:hidden bg-white border-t border-gray-200 hidden dark:bg-gray-800 dark:border-gray-700">
-      <div class="px-4 py-2 space-y-2">
-        <% if user_signed_in? %>
-          <%= link_to "Search", root_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
-          <%= link_to "Upload", new_image_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %> 
-          <%= link_to "Image Vault", images_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
-
-          <% if current_user.admin? %>
-            <%= link_to "Users", admin_users_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
-            <%= link_to "Projects", admin_projects_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
-          <% end %>
-
-          <%= link_to "Logout", destroy_user_session_path, 
-                      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" },
-                      class: "block text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500" %>
-        <% else %>
-          <%= link_to "Login", new_user_session_path, class: "block hover:text-blue-600 dark:hover:text-blue-400" %>
-        <% end %>
-      </div>
-    </div>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto p-4">
